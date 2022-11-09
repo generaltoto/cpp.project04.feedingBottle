@@ -24,18 +24,18 @@ public:
 	 * If the date is after the current date, it has been taken
 	 * If the date is before the current date, we set a reminder
 	 */
-	tm takenDate;
+	time_t takenDate;
 
 	/** Quantity of milk currently in the bottle (in mL) */
-	float quantityInBottle;
+	BottleContent quantityInBottle;
 
-	FeedingBottle(int maxCapacity, int quantity);
+	FeedingBottle(int maxCapacity, time_t date, BottleContent ingredients);
 
 	/** Updates the bottle's taken state */
 	void updateTaken(TakenState state);
 
 	/** Allows you to update the taken date if the baby spit the fedding bottle out */
-	void updateTakenDate(tm date);
+	void updateTakenDate(time_t date);
 };
 
 
