@@ -1,7 +1,7 @@
 #include "Stock.h"
 
 
-Stock::Stock(float quantity) { this->quantity = quantity; }
+Stock::Stock(float quantity) : quantity(quantity) {};
 
 float Stock::getStock() { return this->quantity; }
 

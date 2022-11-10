@@ -3,7 +3,7 @@
 class Stock
 {
 protected:
-	float quantity;
+	float quantity = 1000.0;
 
 public:
 
@@ -22,9 +22,3 @@ public:
 class MilkStock : public Stock {};
 
 class CocoaStock : public Stock {};
-
-class WheyStock : public Stock {};
-
-class CreatineStock : public Stock {};
-
-class CH4Stock : public Stock {};

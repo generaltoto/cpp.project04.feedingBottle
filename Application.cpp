@@ -2,19 +2,43 @@
 #include "FeedingBottle.h"
 #include "Shared.h"
 
+#include <list>
 #include <SDL.h>
 #include <stdio.h>
 
-void Application::addBottle(BottleCommandTemplate command, int bottleCapacity = 330)
+const int NUMBER_SECONDS_IN_AN_HOUR = 1080000;
+
+/** Utility function used to return the element at the ith position in a list */
+FeedingBottle iterateBottlesList(std::list<FeedingBottle> list, int position)
 {
-	this->bottleList.push_front(
-		FeedingBottle(bottleCapacity, command.deliveryDate, command.content)
-	);
+	std::list<FeedingBottle>::iterator it = list.begin();
+	for (int i = 0; i < position; i++) { ++it; }
+	return *it;
 }
 
-Uint32 Application::convertToSeconds(int hours, int minutes, int seconds)
+Uint32 iterateDatesList(std::list<Uint32> list, int position)
 {
-	return (hours * 3600) + (minutes * 60) + seconds;
+	std::list<Uint32>::iterator it = list.begin();
+	for (int i = 0; i < position; i++) { ++it; }
+	return *it;
+}
+
+bool Application::addBottle(BottleCommandTemplate command, int bottleCapacity)
+{
+	if (milkStock.getStock() > command.content.milkQuantity) milkStock.emptyStock(command.content.milkQuantity);
+	else std::cout << "not enough milk, please buy some more"; return false;
+
+
+	if (cocoaStock.getStock() > command.content.cocoaQuantity) cocoaStock.emptyStock(command.content.cocoaQuantity);
+	else std::cout << "not enough cocoa, please buy some more"; return false;
+
+	this->bottleList.push_back(FeedingBottle(bottleCapacity, command.deliveryDate, command.content));
+	return true;
+}
+
+Uint32 Application::convertToSeconds(BasicDate date)
+{
+	return (date.hours * 3600) + (date.minutes * 60) + date.seconds;
 }
 
 BasicDate Application::convertToDate(Uint32 seconds)
@@ -29,22 +53,91 @@ BasicDate Application::convertToDate(Uint32 seconds)
 void Application::setTimer(FeedingBottle bottle)
 {
 	time_t currentTime = time(0);
-	if (bottle.takenDate > currentTime)
+	if ((bottle.takenDate > currentTime))
 	{
 		Uint32 time = currentTime - bottle.takenDate;
 		SDL_AddTimer(time, NULL, NULL);
 	}
 }
 
-void Application::launchCommand(BottleCommandTemplate command)
+void Application::launchCommand()
 {
 	for (int i = 0; i < this->bottleList.size(); i++)
 	{
+		setTimer(iterateBottlesList(this->bottleList, i));
+	}
+	this->bottleList = {};
+}
 
-		std::list<std::string>::iterator it = this->bottleList.begin();
-		setTimer(bottleList(i));
+void Application::runInputs()
+{
+	std::cout << "Stock de lait : " << milkStock.getStock() << std::endl;
+	std::cout << "Stock de cacao : " << cocoaStock.getStock() << "\n\n";
+
+	bool automatic = true;
+
+	std::cout << "Voulez faire une programation automatique (toutes les 3h) ? Repondre true / false" << std::endl;
+	std::cin >> automatic;
+
+	int bottleCapacity;
+	std::cout << "Quelle est la capacité de la bouteille ? (en mL)" << std::endl;
+	std::cin >> bottleCapacity;
+
+	BottleContent content;
+	std::cout << "Quelle quantité de lait vouler vous ajouter ? (en mL)" << std::endl;
+	std::cout << "Pour rappel, il vous reste : " << milkStock.getStock() << std::endl;
+	std::cin >> content.milkQuantity;
+
+	std::cout << "Quelle quantité de cacao vouler vous ajouter ? (en mg)" << std::endl;
+	std::cout << "Pour rappel, il vous reste : " << cocoaStock.getStock() << std::endl;
+	std::cin >> content.cocoaQuantity;
+
+	if (automatic == true)
+	{
+		int nbBottle;
+		std::cout << "Combien de biberons voulez vous programmer ?" << std::endl;
+		std::cin >> nbBottle;
+
+		BasicDate date;
+		std::cout << "Quand est prévu le premier biberon ? ex : 'heure,minutes,secondes'" << std::endl;
+		std::cin >> date.hours, date.minutes, date.seconds;
+
+		BottleCommandTemplate bTemplate{ content, convertToSeconds(date) };
+		for (Uint32 i = 0; i < nbBottle; i++) {
+			if (addBottle({ content, convertToSeconds(date) + (i * 3 * NUMBER_SECONDS_IN_AN_HOUR) }, bottleCapacity)) continue;
+			else std::cout << "Pas assez d'ingrédients" << std::endl; break;
+		}
+		launchCommand();
+		std::cout << "Vos / Votre biberon(s) sont bien programmé(s) !" << std::endl;
+	}
+	else if (automatic == false)
+	{
+		bool addAnother = true;
+		std::list<Uint32> datesList = {};
+
+		while (addAnother)
+		{
+			BasicDate date;
+			std::cout << "Quand est prévu le biberon ? ex : 'heure,minutes,secondes'" << std::endl;
+			std::cin >> date.hours, date.minutes, date.seconds;
+			datesList.push_back(convertToSeconds(date));
+
+			while (addAnother != true && addAnother != false)
+			{
+				std::cout << "Ajouter un autre biberon ? Répondre true / false" << std::endl;
+				std::cin >> addAnother;
+			}
+		}
+		for (int i = 0; i < datesList.size(); i++)
+		{
+			if (addBottle({ content, iterateDatesList(datesList, i) })) continue;
+			else std::cout << "Pas assez d'ingrédients" << std::endl; break;
+		}
+		launchCommand();
+		std::cout << "Vos / Votre biberon(s) sont bien programmé(s) !" << std::endl;
 	}
 
+	return;
 }
 
 

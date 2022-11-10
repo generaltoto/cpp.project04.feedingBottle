@@ -15,7 +15,7 @@ struct BasicDate { int hours, minutes, seconds; };
 /** All ingredients contained in the bottle */
 struct BottleContent
 {
-	float milkQuantity, cocoaQuantity, creatineQuantity, wheyQuantity, CH4quantity;
+	float milkQuantity, cocoaQuantity;
 };
 
 /** Template for bottle command. All quantities are in mg */
