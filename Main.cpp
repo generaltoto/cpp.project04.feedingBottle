@@ -3,13 +3,13 @@
 #include <SDL.h>
 #include <stdio.h>
 
-#include "Application.h"
+#include "AppManager.h"
 
 using namespace std;
 
 int main(int argc, char* args[])
 {
-	Application app;
+	AppManager app;
 
 	app.initSDLWindow();
 	app.runInputs();

@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -142,16 +142,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="FeedingBottle.h" />
+    <ClInclude Include="AppManager.h" />
+    <ClInclude Include="BottleModel.h" />
     <ClInclude Include="Shared.h" />
-    <ClInclude Include="Stock.h" />
+    <ClInclude Include="StockModel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FeedingBottle.cpp" />
+    <ClCompile Include="BottleImpl.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="AppManagerImpl.cpp" />
+    <ClCompile Include="StockImpl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
