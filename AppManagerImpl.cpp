@@ -17,9 +17,9 @@ BottleModel iterateBottlesList(std::list<BottleModel> list, int position)
 	return *it;
 }
 
-Uint32 iterateDatesList(std::list<Uint32> list, int position)
+Uint32 iterateDatesList(std::list<int> list, int position)
 {
-	std::list<Uint32>::iterator it = list.begin();
+	std::list<int>::iterator it = list.begin();
 	for (int i = 0; i < position; i++) { ++it; }
 	return *it;
 }
@@ -134,20 +134,20 @@ void AppManager::runInputs()
 	else if (automatic == 1)
 	{
 		bool addAnother = true;
-		std::list<Uint32> datesList = {};
+		std::list<int> datesList = {};
 
 		while (addAnother)
 		{
 			BasicDate date;
 			std::cout << "Quand est prévu le biberon ? heure puis minutes puis secondes" << std::endl;
-			std::cin >> date.seconds >> date.minutes >> date.hours;
+			std::cin >> date.hours >> date.minutes >> date.seconds;
 			datesList.push_back(convertToSeconds(date));
 
-			while (addAnother != true && addAnother != false)
+			do
 			{
 				std::cout << "Ajouter un autre biberon ? Répondre true / false" << std::endl;
 				std::cin >> addAnother;
-			}
+			} while (addAnother != true && addAnother != false);
 		}
 		for (int i = 0; i < datesList.size(); i++)
 		{
