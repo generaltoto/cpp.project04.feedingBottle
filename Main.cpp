@@ -4,18 +4,17 @@
 #include <stdio.h>
 
 #include "AppManager.h"
+#include "SdlWindowModel.h"
 
 using namespace std;
 
 int main(int argc, char* args[])
 {
 	AppManager app;
+	SdlWindowModel window;
 
-	// app.initSDLWindow();
+	app.initWindow(window);
 	app.runInputs();
-
-	// SDL_DestroyWindow(app.getWindow());
-	// SDL_Quit();
 
 	return 0;
 }

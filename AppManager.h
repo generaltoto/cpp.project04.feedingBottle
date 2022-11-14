@@ -8,6 +8,7 @@
 #include "BottleModel.h"
 #include "StockModel.h"
 
+/// Manages the entire application, linking controllers to views
 class AppManager
 {
 private:
@@ -15,9 +16,6 @@ private:
 	StockModel stock;
 	
 	bool isAutomaticCommand;
-
-	SDL_Window* window;
-	SDL_Surface* screenSurface;
 
 public:
 
@@ -42,13 +40,9 @@ public:
 	/// Runs all inputs of the app 
 	void runInputs();
 
+	/// Initiates the SDL window of our application
+	void initWindow(SdlWindowModel window);
 
-	/// Returns the window used by SDL 
-	SDL_Window* getWindow(void);
-
-	/// Returns the surface contained in the SDL window
-	SDL_Surface* getSurface(void);
-
-	/// Creates the SDL window and keeps it open until we press the red cross
-	void initSDLWindow(void);
+	/// Closes the SDL window of our application
+	void destroyWindow(SdlWindowModel window);
 };

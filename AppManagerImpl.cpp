@@ -1,7 +1,9 @@
 #include "AppManager.h"
 #include "BottleModel.h"
 #include "StockModel.h"
+#include "SdlWindowModel.h"
 #include "Shared.h"
+#include "UtilityFunctions.h"
 
 #include <list>
 #include <SDL.h>
@@ -9,26 +11,9 @@
 
 const int NUMBER_SECONDS_IN_AN_HOUR = 3600;
 
-/** Utility function used to return the element at the ith position in a list */
-BottleModel iterateBottlesList(std::list<BottleModel> list, int position)
-{
-	std::list<BottleModel>::iterator it = list.begin();
-	for (int i = 0; i < position; i++) { ++it; }
-	return *it;
-}
-
-Uint32 iterateDatesList(std::list<int> list, int position)
-{
-	std::list<int>::iterator it = list.begin();
-	for (int i = 0; i < position; i++) { ++it; }
-	return *it;
-}
-
 AppManager::AppManager() {
 	bottleList = {};
 	isAutomaticCommand = false;
-	window = NULL;
-	screenSurface = NULL;
 }
 
 AppManager::~AppManager() {}
@@ -169,24 +154,13 @@ void AppManager::runInputs()
 	return;
 }
 
-
-SDL_Window* AppManager::getWindow(void) { return this->window; }
-
-SDL_Surface* AppManager::getSurface(void) { return this->screenSurface; }
-
-void AppManager::initSDLWindow(void)
+void AppManager::initWindow(SdlWindowModel window)
 {
-	if (SDL_Init(SDL_INIT_TIMER) < 0) printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-	else
-	{
-		this->window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (this->window == NULL) printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		else
-		{
-			this->screenSurface = SDL_GetWindowSurface(this->window);
-			SDL_FillRect(this->screenSurface, NULL, SDL_MapRGB(this->screenSurface->format, 0xFF, 0xFF, 0xFF));
-			SDL_UpdateWindowSurface(this->window);
-			SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; } }
-		}
-	}
+	window.initSDLWindow();
+}
+
+void AppManager::destroyWindow(SdlWindowModel window)
+{
+	SDL_DestroyWindow(window.getWindow());
+	SDL_Quit();
 }
