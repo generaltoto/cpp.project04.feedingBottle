@@ -23,7 +23,6 @@ private:
 public:
 
 	Application();
-	~Application();
 
 	/// Adds a bottle to the [bottleList]
 	bool addBottle(BottleCommandTemplate command, int bottleCapacity = 330);

@@ -3,11 +3,9 @@
 class Stock
 {
 protected:
-	float quantity = 1000.0;
+	float quantity;
 
 public:
-
-	Stock(float quantity);
 
 	/** Returns the stock value */
 	float getStock();
@@ -19,6 +17,6 @@ public:
 	void emptyStock(float quantityToRemove);
 };
 
-class MilkStock : public Stock {};
+class MilkStock : public Stock { MilkStock(float quantity); };
 
-class CocoaStock : public Stock {};
+class CocoaStock : public Stock { CocoaStock(float quantity); };

@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "FeedingBottle.h"
+#include "Stock.h"
 #include "Shared.h"
 
 #include <list>
@@ -22,6 +23,8 @@ Uint32 iterateDatesList(std::list<Uint32> list, int position)
 	for (int i = 0; i < position; i++) { ++it; }
 	return *it;
 }
+
+Application::Application() : milkStock(MilkStock(1000)) {};
 
 bool Application::addBottle(BottleCommandTemplate command, int bottleCapacity)
 {
@@ -56,6 +59,7 @@ void Application::setTimer(FeedingBottle bottle)
 	if ((bottle.takenDate > currentTime))
 	{
 		Uint32 time = currentTime - bottle.takenDate;
+		std::cout << "\tStarted timer with " << time << " seconds" << std::endl;
 		SDL_AddTimer(time, NULL, NULL);
 	}
 }
@@ -148,7 +152,7 @@ SDL_Surface* Application::getSurface(void) { return this->screenSurface; }
 void Application::initSDLWindow(void)
 {
 	if (SDL_Init(SDL_INIT_TIMER) < 0) printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-	else
+	/*else
 	{
 		this->window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (this->window == NULL) printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -159,5 +163,5 @@ void Application::initSDLWindow(void)
 			SDL_UpdateWindowSurface(this->window);
 			SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; } }
 		}
-	}
+	}*/
 }

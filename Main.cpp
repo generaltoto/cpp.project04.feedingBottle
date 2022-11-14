@@ -11,8 +11,8 @@ int main(int argc, char* args[])
 {
 	Application app;
 
-	app.runInputs();
 	app.initSDLWindow();
+	app.runInputs();
 
 	SDL_DestroyWindow(app.getWindow());
 	SDL_Quit();
