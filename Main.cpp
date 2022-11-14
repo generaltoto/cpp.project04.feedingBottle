@@ -11,11 +11,11 @@ int main(int argc, char* args[])
 {
 	AppManager app;
 
-	app.initSDLWindow();
+	// app.initSDLWindow();
 	app.runInputs();
 
-	SDL_DestroyWindow(app.getWindow());
-	SDL_Quit();
+	// SDL_DestroyWindow(app.getWindow());
+	// SDL_Quit();
 
 	return 0;
 }

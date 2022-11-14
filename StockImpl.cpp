@@ -1,12 +1,23 @@
 #include "StockModel.h"
 
+StockModel::StockModel()
+{
+	milkQuantity = 1000;
+	cocoaQuantity = 500;
+}
 
-float StockModel::getStock() { return this->quantity; }
+float StockModel::getMilkStock() { return this->milkQuantity; }
 
-void StockModel::addStock(float quantityToAdd) { this->quantity += quantityToAdd; }
+float StockModel::getCocoaStock() { return this->cocoaQuantity; }
 
-void StockModel::emptyStock(float quantityToRemove) { this->quantity -= quantityToRemove; }
+void StockModel::addStock(float milkToAdd, float cocoaToAdd)
+{
+	this->milkQuantity += milkToAdd;
+	this->cocoaQuantity += cocoaToAdd;
+}
 
-MilkStock::MilkStock(float quantity) { addStock(quantity); };
-
-CocoaStock::CocoaStock(float quantity) { addStock(quantity); };
+void StockModel::emptyStock(float milkToAdd, float cocoaToAdd)
+{
+	this->milkQuantity -= milkToAdd;
+	this->cocoaQuantity -= cocoaToAdd;
+}

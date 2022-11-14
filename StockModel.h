@@ -3,20 +3,22 @@
 class StockModel
 {
 protected:
-	float quantity;
+	float milkQuantity;
+	float cocoaQuantity;
 
 public:
 
-	/** Returns the stock value */
-	float getStock();
+	StockModel();
+
+	/** Returns the milk stock value */
+	float getMilkStock();
+
+	/** Returns the cocoa stock value */
+	float getCocoaStock();
 
 	/** Adds some quantity to the stock */
-	void addStock(float quantityToAdd);
+	void addStock(float milkToAdd, float cocoaToAdd);
 
 	/** Remove some quanty of the stock */
-	void emptyStock(float quantityToRemove);
+	void emptyStock(float milkToAdd, float cocoaToAdd);
 };
-
-class MilkStock : public StockModel { MilkStock(float quantity); };
-
-class CocoaStock : public StockModel { CocoaStock(float quantity); };

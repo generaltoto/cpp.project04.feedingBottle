@@ -12,17 +12,17 @@ class AppManager
 {
 private:
 	std::list<BottleModel> bottleList = {};
-	MilkStock milkStock;
-	CocoaStock cocoaStock;
+	StockModel stock;
 	
-	bool isAutomaticCommand = false;
+	bool isAutomaticCommand;
 
-	SDL_Window* window = NULL;
-	SDL_Surface* screenSurface = NULL;
+	SDL_Window* window;
+	SDL_Surface* screenSurface;
 
 public:
 
 	AppManager();
+	~AppManager();
 
 	/// Adds a bottle to the [bottleList]
 	bool addBottle(BottleCommandTemplate command, int bottleCapacity = 330);

@@ -24,13 +24,22 @@ Uint32 iterateDatesList(std::list<Uint32> list, int position)
 	return *it;
 }
 
+AppManager::AppManager() {
+	bottleList = {};
+	isAutomaticCommand = false;
+	window = NULL;
+	screenSurface = NULL;
+}
+
+AppManager::~AppManager() {}
+
 bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity)
 {
-	if (milkStock.getStock() > command.content.milkQuantity) milkStock.emptyStock(command.content.milkQuantity);
+	if (stock.getMilkStock() > command.content.milkQuantity) stock.emptyStock(command.content.milkQuantity, 0);
 	else std::cout << "not enough milk, please buy some more"; return false;
 
 
-	if (cocoaStock.getStock() > command.content.cocoaQuantity) cocoaStock.emptyStock(command.content.cocoaQuantity);
+	if (stock.getMilkStock() > command.content.cocoaQuantity) stock.emptyStock(0, command.content.cocoaQuantity);
 	else std::cout << "not enough cocoa, please buy some more"; return false;
 
 	this->bottleList.push_back(BottleModel(bottleCapacity, command.deliveryDate, command.content));
@@ -58,7 +67,7 @@ void AppManager::setTimer(BottleModel bottle)
 	{
 		Uint32 time = currentTime - bottle.takenDate;
 		std::cout << "\tStarted timer with " << time << " seconds" << std::endl;
-		SDL_AddTimer(time, NULL, NULL);
+		// SDL_AddTimer(time, NULL, NULL);
 	}
 }
 
@@ -73,8 +82,8 @@ void AppManager::launchCommand()
 
 void AppManager::runInputs()
 {
-	std::cout << "Stock de lait : " << milkStock.getStock() << std::endl;
-	std::cout << "Stock de cacao : " << cocoaStock.getStock() << "\n\n";
+	std::cout << "Stock de lait : " << stock.getMilkStock() << std::endl;
+	std::cout << "Stock de cacao : " << stock.getCocoaStock() << "\n\n";
 
 	bool automatic = true;
 
@@ -87,11 +96,11 @@ void AppManager::runInputs()
 
 	BottleContent content;
 	std::cout << "Quelle quantité de lait vouler vous ajouter ? (en mL)" << std::endl;
-	std::cout << "Pour rappel, il vous reste : " << milkStock.getStock() << std::endl;
+	std::cout << "Pour rappel, il vous reste : " << stock.getMilkStock() << std::endl;
 	std::cin >> content.milkQuantity;
 
 	std::cout << "Quelle quantité de cacao vouler vous ajouter ? (en mg)" << std::endl;
-	std::cout << "Pour rappel, il vous reste : " << cocoaStock.getStock() << std::endl;
+	std::cout << "Pour rappel, il vous reste : " << stock.getCocoaStock() << std::endl;
 	std::cin >> content.cocoaQuantity;
 
 	if (automatic == true)
@@ -150,7 +159,7 @@ SDL_Surface* AppManager::getSurface(void) { return this->screenSurface; }
 void AppManager::initSDLWindow(void)
 {
 	if (SDL_Init(SDL_INIT_TIMER) < 0) printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-	/*else
+	else
 	{
 		this->window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (this->window == NULL) printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -161,5 +170,5 @@ void AppManager::initSDLWindow(void)
 			SDL_UpdateWindowSurface(this->window);
 			SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; } }
 		}
-	}*/
+	}
 }
