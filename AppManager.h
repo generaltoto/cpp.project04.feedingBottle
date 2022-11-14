@@ -28,10 +28,10 @@ public:
 	bool addBottle(BottleCommandTemplate command, int bottleCapacity = 330);
 
 	/// Converts a basic hours (H/Min/Sec) into seconds 
-	Uint32 convertToSeconds(BasicDate date);
+	int convertToSeconds(BasicDate date);
 
 	/// Converts seconds into a basic hour display (H/Min/Sec)
-	BasicDate convertToDate(Uint32 seconds);
+	BasicDate convertToDate(int seconds);
 
 	/// Sets a timer with the bottle delivery date depending on the current date 
 	void setTimer(BottleModel bottle);
