@@ -11,9 +11,6 @@ using namespace std;
 int main(int argc, char* args[])
 {
 	AppManager app;
-	SdlWindowModel window;
-
-	app.initWindow(window);
 	app.runInputs();
 
 	return 0;

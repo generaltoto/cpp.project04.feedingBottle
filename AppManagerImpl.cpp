@@ -55,7 +55,7 @@ BasicDate AppManager::convertToDate(int seconds)
 void AppManager::setTimer(BottleModel bottle)
 {
 	std::cout << "\tStarted timer with " << bottle.takenDate << " seconds" << std::endl;
-	// SDL_AddTimer(bottle.takenDate, NULL, NULL);
+	SDL_AddTimer(bottle.takenDate, NULL, NULL);
 }
 
 void AppManager::launchCommand()
@@ -69,6 +69,20 @@ void AppManager::launchCommand()
 
 void AppManager::runInputs()
 {
+	SdlWindowModel window;
+	initWindow(window);
+
+	SDL_Event e;
+	bool quit = false;
+	while (quit == false) {
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT) quit = true;
+		}
+	}
+	window.drawNavbar();
+
+	return;
+
 	std::cout << "Stock de lait : " << stock.getMilkStock() << std::endl;
 	std::cout << "Stock de cacao : " << stock.getCocoaStock() << "\n\n";
 
@@ -154,12 +168,9 @@ void AppManager::runInputs()
 	return;
 }
 
-void AppManager::initWindow(SdlWindowModel window)
-{
-	window.initSDLWindow();
-}
+void AppManager::initWindow(SdlWindowModel& window) { window.initSDLWindow(); }
 
-void AppManager::destroyWindow(SdlWindowModel window)
+void AppManager::destroyWindow(SdlWindowModel& window)
 {
 	SDL_DestroyWindow(window.getWindow());
 	SDL_Quit();

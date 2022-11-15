@@ -7,6 +7,7 @@
 #include "Shared.h"
 #include "BottleModel.h"
 #include "StockModel.h"
+#include "SdlWindowModel.h"
 
 /// Manages the entire application, linking controllers to views
 class AppManager
@@ -41,8 +42,8 @@ public:
 	void runInputs();
 
 	/// Initiates the SDL window of our application
-	void initWindow(SdlWindowModel window);
+	void initWindow(SdlWindowModel& window);
 
 	/// Closes the SDL window of our application
-	void destroyWindow(SdlWindowModel window);
+	void destroyWindow(SdlWindowModel& window);
 };

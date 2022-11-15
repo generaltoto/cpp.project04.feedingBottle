@@ -26,5 +26,15 @@ public:
 
 	/// Creates the SDL window and keeps it open until we press the red cross
 	void initSDLWindow(void);
+
+	void drawNavbar(void);
+
+	/// Draws a rectangle
+	/// \param - color : rgba color of our rectangle
+	/// \param - x : x position of the rectangle
+	/// \param - y : y position of the rectangle
+	/// \param - width : width of the rectangle
+	/// \param - height : height of the rectangle
+	void drawRectangle(SDL_Color color, int x, int y, int width, int height);
 };
 

@@ -1,13 +1,15 @@
 #pragma once
 
+#include <ctime>
+
 #ifndef SHARED_H
 #define SHARED_H
 
 /// Fedding Bottle State 
 enum TakenState { TAKEN, SCHEDULED, SPITED };
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 400;
+const int SCREEN_HEIGHT = 650;
 
 /// Basic date format for dispaly
 struct BasicDate { int hours, minutes, seconds; };
