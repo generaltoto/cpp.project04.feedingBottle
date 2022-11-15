@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-2.20.1\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_image-2.6.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-2.20.1\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_image-2.6.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -122,7 +122,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,6 +160,9 @@
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="x64\Debug\SourceSerifPro-Light.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

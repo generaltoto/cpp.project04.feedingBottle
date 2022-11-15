@@ -7,6 +7,7 @@
 
 #include <list>
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 
 const int NUMBER_SECONDS_IN_AN_HOUR = 3600;
@@ -71,6 +72,7 @@ void AppManager::runInputs()
 {
 	SdlWindowModel window;
 	initWindow(window);
+	window.drawNavbar();
 
 	SDL_Event e;
 	bool quit = false;
@@ -79,7 +81,6 @@ void AppManager::runInputs()
 			if (e.type == SDL_QUIT) quit = true;
 		}
 	}
-	window.drawNavbar();
 
 	return;
 
@@ -173,5 +174,9 @@ void AppManager::initWindow(SdlWindowModel& window) { window.initSDLWindow(); }
 void AppManager::destroyWindow(SdlWindowModel& window)
 {
 	SDL_DestroyWindow(window.getWindow());
+	SDL_FreeSurface(window.getSurface());
+	SDL_DestroyTexture(window.getTexture());
+	TTF_CloseFont(window.getFont());
+	TTF_Quit();
 	SDL_Quit();
 }

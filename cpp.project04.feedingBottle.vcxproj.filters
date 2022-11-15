@@ -56,4 +56,9 @@
     <None Include=".gitattributes" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="x64\Debug\SourceSerifPro-Light.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
 </Project>
