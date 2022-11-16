@@ -13,7 +13,7 @@ const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 650;
 
 /// Basic date format for dispaly
-struct BasicDate { int hours, minutes, seconds; };
+struct BasicDate { long long hours, minutes, seconds; };
 
 /// All ingredients contained in the bottle
 struct BottleContent { float milkQuantity, cocoaQuantity; };

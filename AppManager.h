@@ -2,7 +2,10 @@
 
 #include <iostream>
 #include <list>
+#include <chrono>
+#include <ctime>
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 #include "Shared.h"
 #include "BottleModel.h"
@@ -25,12 +28,6 @@ public:
 
 	/// Adds a bottle to the [bottleList]
 	bool addBottle(BottleCommandTemplate command, int bottleCapacity = 330);
-
-	/// Converts a basic hours (H/Min/Sec) into seconds 
-	int convertToSeconds(BasicDate date);
-
-	/// Converts seconds into a basic hour display (H/Min/Sec)
-	BasicDate convertToDate(int seconds);
 
 	/// Sets a timer with the bottle delivery date depending on the current date 
 	void setTimer(BottleModel bottle);
