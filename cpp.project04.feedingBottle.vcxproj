@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-2.20.1\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_image-2.6.2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-2.20.1\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_image-2.6.2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\include;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-2.20.1\include;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_image-2.6.2\include;D:\Documents\Dev\Visual Libraries\SDL2-2.24.2\include;D:\Documents\Dev\Visual Libraries\SDL2_ttf-2.20.1\include;D:\Documents\Dev\Visual Libraries\SDL2_image-2.6.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_image-devel-2.6.2-VC\SDL2_image-2.6.2\lib\x64;C:\Users\tdelorme\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-devel-2.20.1-VC\SDL2_ttf-2.20.1\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2-2.24.2\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_ttf-2.20.1\lib\x64;C:\Users\thoma\Documents\Visual Studio 2022\Development Librairies\SDL2_image-2.6.2\lib\x64;D:\Documents\Dev\Visual Libraries\SDL2-2.24.2\lib\x64;D:\Documents\Dev\Visual Libraries\SDL2_ttf-2.20.1\lib\x64;D:\Documents\Dev\Visual Libraries\SDL2_image-2.6.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -144,6 +144,8 @@
   <ItemGroup>
     <ClInclude Include="AppManager.h" />
     <ClInclude Include="BottleModel.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="SdlFunction.h" />
     <ClInclude Include="SdlWindowModel.h" />
     <ClInclude Include="Shared.h" />
     <ClInclude Include="StockModel.h" />
@@ -151,8 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BottleImpl.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="AppManagerImpl.cpp" />
+    <ClCompile Include="SdlFunction.cpp" />
     <ClCompile Include="SdlWindowModel.cpp" />
     <ClCompile Include="StockImpl.cpp" />
   </ItemGroup>

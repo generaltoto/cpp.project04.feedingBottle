@@ -1,5 +1,4 @@
 #pragma once
-
 #include <ctime>
 
 #ifndef SHARED_H
@@ -7,6 +6,8 @@
 
 /// Fedding Bottle State 
 enum TakenState { TAKEN, SCHEDULED, SPITED };
+
+enum View { DAILYVIEW, STOCKVIEW };
 
 const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 650;

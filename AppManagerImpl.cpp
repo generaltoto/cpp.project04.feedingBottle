@@ -74,11 +74,42 @@ void AppManager::runInputs()
 	initWindow(window);
 	window.drawNavbar();
 
+	Button daily = {
+	{0, 50, SCREEN_WIDTH / 2, 40},
+	{255, 150, 150, 255},
+	{255, 255, 255, 255},
+	"Daily"
+	};
+	Button stockView = {
+		{SCREEN_WIDTH / 2, 50, SCREEN_WIDTH / 2, 40},
+		{150, 255, 150, 255},
+		{255, 255, 255, 255},
+		"Stock"
+	};
+	Button add = {
+		{SCREEN_WIDTH / 2, 50, SCREEN_WIDTH / 2, 40},
+		{150, 255, 150, 255},
+		{255, 255, 255, 255},
+		"+"
+	};
+	daily.displayButton(window.getRenderer(), window);
+	stockView.displayButton(window.getRenderer(), window);
+	SDL_RenderPresent(window.getRenderer());
+
 	SDL_Event e;
 	bool quit = false;
 	while (quit == false) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_QUIT) quit = true;
+
+			if (e.type == SDL_MOUSEBUTTONDOWN) {
+				if (daily.clickOnRect(e.motion.x, e.motion.y)) {
+					daily.onClick();
+				}
+				if (stockView.clickOnRect(e.motion.x, e.motion.y)) {
+					stockView.onClick();
+				}
+			}
 		}
 	}
 
@@ -117,7 +148,7 @@ void AppManager::runInputs()
 
 		BottleCommandTemplate bTemplate{ content, convertToSeconds(date) };
 		for (Uint32 i = 0; i < nbBottle; i++) {
-			if (addBottle({ content, convertToSeconds(date) + (i * 3 * NUMBER_SECONDS_IN_AN_HOUR) }, bottleCapacity) == 1)
+			if (addBottle({ content, convertToSeconds(date) + (i * 3 * NUMBER_SECONDS_IN_AN_HOUR) }, bottleCapacity))
 			{
 				std::cout << "Programmé la " << i+1 << "e bouteille" << std::endl;
 				continue;
