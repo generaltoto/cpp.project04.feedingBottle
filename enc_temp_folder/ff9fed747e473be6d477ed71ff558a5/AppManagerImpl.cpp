@@ -42,7 +42,7 @@ void AppManager::setTimer(BottleModel bottle)
 	
 	const time_point<system_clock> now = system_clock::now();
 	auto curTime = system_clock::to_time_t(now);
-	long long end = curTime + bottle.takenDate - duration_since_midnight(now);
+	long long end = curTime + (bottle.takenDate - duration_since_midnight(now));
 	long long timerTime = end - curTime;
 
 	std::cout << "\tStarted timer with " << timerTime << " seconds" << std::endl;

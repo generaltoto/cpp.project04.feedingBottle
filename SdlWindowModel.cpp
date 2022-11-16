@@ -38,8 +38,15 @@ void SdlWindowModel::initSDLWindow(void)
 
 void SdlWindowModel::drawNavbar(void)
 {
-	drawRectangle({ 100,100,100,255 }, { 0, 0, SCREEN_WIDTH, 65 });
+	int elHeight = 40, titleElHeight = 55;
+	drawRectangle({ 100,100,100,255 }, { 0, 0, SCREEN_WIDTH, titleElHeight });
 	drawText("Baby Feeder", { 255,255,255,255 }, { SCREEN_WIDTH / 3, 0, 50, 25 });
+	
+	drawRectangle({ 150,150,150,255 }, { 0, titleElHeight, SCREEN_WIDTH / 2, elHeight });
+	drawText("Daily", { 255,255,255,255 }, { 0, titleElHeight, SCREEN_WIDTH / 2, elHeight });
+
+	drawRectangle({ 150,150,150,255 }, { SCREEN_WIDTH / 2, titleElHeight, SCREEN_WIDTH / 2, elHeight });
+	drawText("Stocks", { 255,255,255,255 }, { SCREEN_WIDTH / 2, titleElHeight, SCREEN_WIDTH / 2, elHeight });
 
 	SDL_RenderPresent(this->renderer);
 }
