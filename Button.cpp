@@ -30,9 +30,7 @@ DailyButton::DailyButton(SDL_Rect rect, SDL_Color color, SDL_Color textColor, co
 	this->text = text;
 }
 
-void DailyButton::onClick() {
-	cout << "Clic Daily" << endl;
-}
+void DailyButton::onClick(DisplayView& view) { view = DAILY; }
 
 
 
@@ -43,10 +41,7 @@ StockButton::StockButton(SDL_Rect rect, SDL_Color color, SDL_Color textColor, co
 	this->text = text;
 }
 
-void StockButton::onClick() {
-	cout << "Clic Stock" << endl;
-}
-
+void StockButton::onClick(DisplayView& view) { view = STOCK; }
 
 
 AddBot::AddBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
@@ -56,11 +51,7 @@ AddBot::AddBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* 
 	this->text = text;
 }
 
-void AddBot::onClick() {
-	cout << "Clic add" << endl;
-}
-
-
+void AddBot::onClick(DisplayView& view) { view = ADD; }
 
 
 AddStock::AddStock(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
@@ -75,7 +66,6 @@ void AddStock::onClick() {
 }
 
 
-
 AutoInc::AutoInc(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
 	this->rect = rect;
 	this->color = color;
@@ -83,8 +73,8 @@ AutoInc::AutoInc(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char
 	this->text = text;
 }
 
-void AutoInc::onClick(bool* time) {
-	time != time;
+void AutoInc::onClick(bool& time) {
+	time = !time;
 	cout << "Clic auto increment" << endl;
 }
 
@@ -101,7 +91,6 @@ void Submit::onClick() {
 }
 
 
-
 ViewBot::ViewBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
 	this->rect = rect;
 	this->color = color;
@@ -114,7 +103,6 @@ void ViewBot::onClick() {
 }
 
 
-
 EditBot::EditBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
 	this->rect = rect;
 	this->color = color;
@@ -125,7 +113,6 @@ EditBot::EditBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char
 void EditBot::onClick() {
 	cout << "Clic editbot" << endl;;
 }
-
 
 
 TakenState::TakenState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
@@ -150,7 +137,6 @@ SchedState::SchedState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, cons
 void SchedState::onClick() {
 	cout << "Clic taken" << endl;;
 }
-
 
 
 SpitState::SpitState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {

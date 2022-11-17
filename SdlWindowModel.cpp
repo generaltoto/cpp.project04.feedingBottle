@@ -38,9 +38,32 @@ void SdlWindowModel::initSDLWindow(void)
 	SDL_RenderPresent(this->renderer);
 }
 
-void SdlWindowModel::drawNavbar(void)
+void SdlWindowModel::drawAppbar(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add)
 {
 	drawRectangle({ 100,100,100,255 }, { 0, 0, SCREEN_WIDTH, 50 }, this->renderer);
-	drawText("Baby Feeder", { 255,255,255,255 }, { SCREEN_WIDTH / 3, 0, 50, 25 },*this);
+	drawText("Baby Feeder", { 255,255,255,255 }, { SCREEN_WIDTH / 3, 0, 50, 25 }, *this);
+
+	daily.displayButton(this->renderer, window);
+	stock.displayButton(this->renderer, window);
+	add.displayButton(this->renderer, window);
+
+	int navbarHeight = 90;
+	drawRectangle({ 240,240,240,255 }, { 40, 40 + navbarHeight, SCREEN_WIDTH - 80, SCREEN_HEIGHT - navbarHeight - 80 }, this->renderer);
+
 	SDL_RenderPresent(this->renderer);
+}
+
+void SdlWindowModel::dispalyDailyView(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add)
+{
+	drawAppbar(window, daily, stock, add);
+}
+
+void SdlWindowModel::displayAddBottleView(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add)
+{
+	drawAppbar(window, daily, stock, add);
+}
+
+void SdlWindowModel::displayStockView(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add)
+{
+	drawAppbar(window, daily, stock, add);
 }

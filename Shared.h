@@ -5,7 +5,10 @@
 #define SHARED_H
 
 /// Fedding Bottle State 
-enum TakenState { TAKEN, SCHEDULED, SPITED };
+enum BottleState { TAKEN, SCHEDULED, SPITED };
+
+/// Different views of the application
+enum DisplayView { DAILY, STOCK, ADD };
 
 enum View { DAILYVIEW, STOCKVIEW };
 

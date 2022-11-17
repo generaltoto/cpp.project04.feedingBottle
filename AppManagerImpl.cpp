@@ -28,7 +28,7 @@ bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity)
 	if (stock.getCocoaStock() >= command.content.cocoaQuantity) stock.emptyStock(0, command.content.cocoaQuantity);
 	else
 	{
-		cout << "\nPlus assez de cacao !" << endl; 
+		cout << "\nPlus assez de cacao !" << endl;
 		return false;
 	}
 
@@ -41,7 +41,7 @@ bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity)
 void AppManager::setTimer(BottleModel bottle)
 {
 	using namespace chrono;
-	
+
 	long long timerTime = bottle.takenDate - duration_since_midnight(system_clock::now());
 	if (timerTime <= 0) cout << "\tL'heure que vous avez séléctionné est déjà passée." << endl;
 	else
@@ -89,7 +89,7 @@ void checkCinIntError(int& variable)
 	}
 }
 
-void checkCinFloatError(float& variable) 
+void checkCinFloatError(float& variable)
 {
 	while (true)
 	{
@@ -106,31 +106,43 @@ void checkCinFloatError(float& variable)
 void AppManager::runInputs()
 {
 	SdlWindowModel window;
-	initWindow(window);
-	window.drawNavbar();
-
 	DailyButton daily = {
-	{0, 50, SCREEN_WIDTH / 3, 40},
-	{255, 150, 150, 255},
-	{255, 255, 255, 255},
-	"Daily"
-	};
-	StockButton stockView = {
-		{(SCREEN_WIDTH / 3)*2, 50, SCREEN_WIDTH / 3, 40},
-		{150, 255, 150, 255},
-		{255, 255, 255, 255},
-		"Stock"
+		{0, 50, SCREEN_WIDTH / 3, 40},
+		{150, 150, 150, 255},
+		{20, 20, 20, 255},
+		"Daily"
 	};
 	AddBot add = {
 		{(SCREEN_WIDTH / 3), 50, SCREEN_WIDTH / 3, 40},
-		{150, 150, 255, 255},
-		{255, 255, 255, 255},
+		{190, 190, 190, 255},
+		{20, 20, 20, 255},
 		"Add bottle"
 	};
-	daily.displayButton(window.getRenderer(), window);
-	stockView.displayButton(window.getRenderer(), window);
-	add.displayButton(window.getRenderer(), window);
-	SDL_RenderPresent(window.getRenderer());
+	StockButton stockView = {
+		{(SCREEN_WIDTH / 3) * 2, 50, SCREEN_WIDTH / 3, 40},
+		{150, 150, 150, 255},
+		{20, 20, 20, 255},
+		"Stock"
+	};
+
+	DisplayView currentView = DAILY;
+
+	initWindow(window);
+	switch (currentView)
+	{
+	case DAILY:
+		window.dispalyDailyView(window, daily, stockView, add);
+		break;
+	case STOCK:
+		window.displayStockView(window, daily, stockView, add);
+		break;
+	case ADD:
+		window.displayAddBottleView(window, daily, stockView, add);
+		break;
+	default:
+		break;
+	}
+
 
 	SDL_Event e;
 	bool quit = false;
@@ -140,13 +152,13 @@ void AppManager::runInputs()
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
 				if (daily.clickOnRect(e.motion.x, e.motion.y)) {
-					daily.onClick();
+					daily.onClick(currentView);
 				}
 				if (stockView.clickOnRect(e.motion.x, e.motion.y)) {
-					stockView.onClick();
+					stockView.onClick(currentView);
 				}
 				if (add.clickOnRect(e.motion.x, e.motion.y)) {
-					add.onClick();
+					add.onClick(currentView);
 				}
 			}
 		}
@@ -193,12 +205,12 @@ void AppManager::runInputs()
 		for (Uint32 i = 0; i < nbBottle; i++) {
 			if (addBottle({ content, convertToSeconds(date) + (i * 3 * NUMBER_SECONDS_IN_AN_HOUR) }, bottleCapacity))
 			{
-				cout << "Programmé la " << i+1 << "e bouteille" << endl;
+				cout << "Programmé la " << i + 1 << "e bouteille" << endl;
 				continue;
 			}
 			else
 			{
-				cout << "Pas assez d'ingrédients" << endl; 
+				cout << "Pas assez d'ingrédients" << endl;
 				break;
 			}
 		}
@@ -227,7 +239,7 @@ void AppManager::runInputs()
 		{
 			if (addBottle({ content, iterateDatesList(datesList, i) }))
 			{
-				cout << "Programmé la " << i+1 << "e bouteille" << endl;
+				cout << "Programmé la " << i + 1 << "e bouteille" << endl;
 				continue;
 			}
 			else

@@ -13,7 +13,7 @@ private:
 public:
 
 	/// Current state of the bottle (TAKEN, SCHEDULED, SPIT OUT)
-	TakenState taken;
+	BottleState taken;
 
 	/// Hour the bottle is scheduled for
 	time_t takenDate;
@@ -24,7 +24,7 @@ public:
 	BottleModel(int maxCapacity, time_t date, BottleContent ingredients);
 
 	/// Updates the bottle's state
-	void updateTaken(TakenState state);
+	void updateTaken(BottleState state);
 
 	/// Allows you to update the taken date if the baby spit the fedding bottle out
 	void updateTakenDate(time_t date);

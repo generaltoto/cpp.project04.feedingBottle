@@ -33,7 +33,15 @@ public:
 	/// Creates the SDL window and keeps it open until we press the red cross
 	void initSDLWindow(void);
 
-	/// Displays the navbar of the app
-	void drawNavbar(void);
+	void drawAppbar(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add);
+
+	/// Renders the bottles planning with navbar
+	void dispalyDailyView(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add);
+
+	/// Renders the page to add a new bottle
+	void displayAddBottleView(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add);
+
+	/// Renders the stock of ingredients
+	void displayStockView(SdlWindowModel& window, DailyButton& daily, StockButton& stock, AddBot& add);
 };
 

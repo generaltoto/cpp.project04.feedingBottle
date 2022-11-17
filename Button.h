@@ -1,8 +1,10 @@
 #pragma once
 
-#include <SDL.h>
+#include "Shared.h"
 
+#include <SDL.h>
 #include <iostream>
+
 using namespace std;
 
 class SdlWindowModel;
@@ -34,7 +36,7 @@ public:
 
 	DailyButton(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
 
-	void onClick();
+	void onClick(DisplayView& view);
 };
 
 class StockButton : public Button {
@@ -42,7 +44,7 @@ public:
 
 	StockButton(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
 
-	void onClick();
+	void onClick(DisplayView& view);
 };
 
 class AddBot : public Button {
@@ -50,7 +52,7 @@ public:
 
 	AddBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
 
-	void onClick();
+	void onClick(DisplayView& view);
 };
 
 class AddStock : public Button {
@@ -66,7 +68,7 @@ public:
 
 	AutoInc(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
 
-	void onClick(bool* time);
+	void onClick(bool& time);
 };
 
 class Submit : public Button {
