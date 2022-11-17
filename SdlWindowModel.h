@@ -4,6 +4,8 @@
 #include "Button.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <list>
+using namespace std;
 
 class SdlWindowModel {
 private:
@@ -33,6 +35,5 @@ public:
 
 	/// Displays the navbar of the app
 	void drawNavbar(void);
-
 };
 

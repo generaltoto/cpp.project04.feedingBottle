@@ -16,7 +16,7 @@
 class AppManager
 {
 private:
-	std::list<BottleModel> bottleList = {};
+	std::list<BottleModel> bottleList;
 	StockModel stock;
 	
 	bool isAutomaticCommand;

@@ -109,26 +109,27 @@ void AppManager::runInputs()
 	initWindow(window);
 	window.drawNavbar();
 
-	Button daily = {
-	{0, 50, SCREEN_WIDTH / 2, 40},
+	DailyButton daily = {
+	{0, 50, SCREEN_WIDTH / 3, 40},
 	{255, 150, 150, 255},
 	{255, 255, 255, 255},
 	"Daily"
 	};
-	Button stockView = {
-		{SCREEN_WIDTH / 2, 50, SCREEN_WIDTH / 2, 40},
+	StockButton stockView = {
+		{(SCREEN_WIDTH / 3)*2, 50, SCREEN_WIDTH / 3, 40},
 		{150, 255, 150, 255},
 		{255, 255, 255, 255},
 		"Stock"
 	};
-	Button add = {
-		{SCREEN_WIDTH / 2, 50, SCREEN_WIDTH / 2, 40},
-		{150, 255, 150, 255},
+	AddBot add = {
+		{(SCREEN_WIDTH / 3), 50, SCREEN_WIDTH / 3, 40},
+		{150, 150, 255, 255},
 		{255, 255, 255, 255},
-		"+"
+		"Add bottle"
 	};
 	daily.displayButton(window.getRenderer(), window);
 	stockView.displayButton(window.getRenderer(), window);
+	add.displayButton(window.getRenderer(), window);
 	SDL_RenderPresent(window.getRenderer());
 
 	SDL_Event e;
@@ -143,6 +144,9 @@ void AppManager::runInputs()
 				}
 				if (stockView.clickOnRect(e.motion.x, e.motion.y)) {
 					stockView.onClick();
+				}
+				if (add.clickOnRect(e.motion.x, e.motion.y)) {
+					add.onClick();
 				}
 			}
 		}
