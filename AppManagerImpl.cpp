@@ -118,19 +118,19 @@ void AppManager::run() {
 	//Creation of the firsts buttons then display them.
 	DailyButton daily = {
 		{0, 50, SCREEN_WIDTH / 3, 40},
-		{100, 100, 100, 255},
+		{217, 216, 218, 255},
 		{20, 20, 20, 255},
 		"Daily"
 	};
 	StockButton stockView = {
 		{(SCREEN_WIDTH / 3) * 2, 50, SCREEN_WIDTH / 3, 40},
-		{200, 200, 200, 255},
+		{217, 216, 218, 255},
 		{20, 20, 20, 255},
 		"Stock"
 	};
 	AddBot add = {
 		{(SCREEN_WIDTH / 3), 50, SCREEN_WIDTH / 3, 40},
-		{150, 150, 150, 255},
+		{217, 216, 218, 255},
 		{20, 20, 20, 255},
 		"Add bottle"
 	};

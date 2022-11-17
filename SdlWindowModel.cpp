@@ -39,7 +39,7 @@ void SdlWindowModel::initSDLWindow(void) {
 
 void SdlWindowModel::drawAppbar(DailyButton& daily, StockButton& stock, AddBot& add) {
 	/* Drawing the menu */
-	drawRectangle({ 100,100,100,255 }, { 0, 0, SCREEN_WIDTH, 50 }, this->renderer);
+	drawRectangle({ 46,83,92,255 }, { 0, 0, SCREEN_WIDTH, 50 }, this->renderer);
 	drawText("Baby Feeder", { 255,255,255,255 }, { SCREEN_WIDTH / 3, 0, 50, 25 }, *this);
 
 	daily.displayButton(this->renderer, *this);
@@ -77,19 +77,22 @@ void SdlWindowModel::dispalyDailyView(DailyButton& daily, StockButton& stock, Ad
 	SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 	SDL_RenderClear(this->renderer);
 	drawAppbar(daily, stock, add);
+
+	this->font = TTF_OpenFont("SourceSerifPro-Light.ttf", 18);
 	int navbarHeight = 90;
-	drawRectangle({ 210,210,210,255 }, { 40, 40 + navbarHeight, SCREEN_WIDTH - 80, SCREEN_HEIGHT - navbarHeight - 80 }, this->renderer);
+	drawRectangle({ 217, 216, 218 }, { 40, 40 + navbarHeight, SCREEN_WIDTH - 80, SCREEN_HEIGHT - navbarHeight - 80 }, this->renderer);
 
 	/* Displaying the feeding bottles of the day */
 	this->font = TTF_OpenFont("SourceSerifPro-Light.ttf", 15);
 	for (int i = 0; i < bottleList.size(); i++) {
-		drawRectangle({ 100,100,255,255 }, { 50, (50 + navbarHeight) + (70*i), SCREEN_WIDTH - 100, 50}, this->renderer);
+		drawRectangle({ 49, 121, 190 }, { 50, (50 + navbarHeight) + (70*i), SCREEN_WIDTH - 100, 50}, this->renderer);
 		string bottleIndexText = "Biberon N° " + convertToString(i+1);
-		drawText(bottleIndexText.c_str(), {0,0,0,255}, {50, (50 + navbarHeight) + (70 * i), SCREEN_WIDTH - 100, 50}, *this);
+		drawText(bottleIndexText.c_str(), { 255,255,255,255 }, {50, (50 + navbarHeight) + (70 * i), SCREEN_WIDTH - 100, 50}, *this);
 		auto date = convertToDate(iterateBottlesList(bottleList, i).takenDate);
 		string text = convertToString(date.hours) + "h "+ convertToString(date.minutes) +"min";
-		drawText(text.c_str(), {0,0,0,255}, {70, (70 + navbarHeight) + (70 * i), SCREEN_WIDTH - 100, 50}, *this);
+		drawText(text.c_str(), {255,255,255,255}, {70, (70 + navbarHeight) + (70 * i), SCREEN_WIDTH - 100, 50}, *this);
 	}
+	this->font = TTF_OpenFont("SourceSerifPro-Light.ttf", 25);
 }
 
 void SdlWindowModel::displayAddBottleView(DailyButton& daily, StockButton& stock, AddBot& add) {
@@ -97,6 +100,11 @@ void SdlWindowModel::displayAddBottleView(DailyButton& daily, StockButton& stock
 	SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 	SDL_RenderClear(this->renderer);
 	drawAppbar(daily, stock, add);
+
+	this->font = TTF_OpenFont("SourceSerifPro-Light.ttf", 18);
+	int navbarHeight = 90;
+	drawRectangle({ 217, 216, 218 }, { 40, 40 + navbarHeight, SCREEN_WIDTH - 80, SCREEN_HEIGHT - navbarHeight - 80 }, this->renderer);
+	this->font = TTF_OpenFont("SourceSerifPro-Light.ttf", 25);
 }
 
 void SdlWindowModel::displayStockView(ContentTemplate content, DailyButton& daily, StockButton& stock, AddBot& add) {
@@ -112,23 +120,23 @@ void SdlWindowModel::displayStockView(ContentTemplate content, DailyButton& dail
 	int stockElHeight = 50;
 	int margin = 40;
 	SDL_Rect displayZone = { margin, margin + navbarHeight, SCREEN_WIDTH - margin*2, SCREEN_HEIGHT - navbarHeight - margin*2 };
-	drawRectangle({ 210,210,210,255 }, displayZone, this->renderer);
+	drawRectangle({ 217, 216, 218 }, displayZone, this->renderer);
 
 	/* Displaying the milk powder quantity */
 	SDL_Rect milkStockZone = { displayZone.x + margin/2, displayZone.y + margin/2, displayZone.w - margin, stockElHeight };
-	drawRectangle({ 150,150,170,255 }, milkStockZone, this->renderer);
+	drawRectangle({ 81, 164, 212 }, milkStockZone, this->renderer);
 	SDL_Rect milkTitleZone = { milkStockZone.x + margin / 4, milkStockZone.y + margin / 4, milkStockZone.w / 2, milkStockZone.h };
-	drawText("Milk Qty ", { 0,0,0,255 }, milkTitleZone, *this);
+	drawText("Milk Qty ", { 255,255,255,255 }, milkTitleZone, *this);
 	SDL_Rect milkQtyZone = { milkTitleZone.x + milkTitleZone.w, milkTitleZone.y, milkStockZone.w / 2, milkStockZone.h };
-	drawText(convertToString(content.milkQuantity).c_str(), {0,0,0,255}, milkQtyZone, *this);
+	drawText(convertToString(content.milkQuantity).c_str(), { 255,255,255,255 }, milkQtyZone, *this);
 
 	/* Displaying the cocoa powder quantity */
 	SDL_Rect cocoaStockZone = { milkStockZone.x, milkStockZone.y + milkStockZone.h + margin / 2, milkStockZone.w, milkStockZone.h };
-	drawRectangle({ 150,150,170,255 }, cocoaStockZone, this->renderer);
+	drawRectangle({ 81, 164, 212 }, cocoaStockZone, this->renderer);
 	SDL_Rect cocoaTitleZone = { cocoaStockZone.x + margin / 4, cocoaStockZone.y + margin / 4, cocoaStockZone.w / 2, cocoaStockZone.h };
-	drawText("Cocoa Qty ", { 0,0,0,255 }, cocoaTitleZone, *this);
+	drawText("Cocoa Qty ", { 255,255,255,255 }, cocoaTitleZone, *this);
 	SDL_Rect cocoaQtyZone = { cocoaTitleZone.x + cocoaTitleZone.w, cocoaTitleZone.y, cocoaStockZone.w / 2, cocoaStockZone.h };
-	drawText(convertToString(content.cocoaQuantity).c_str(), { 0,0,0,255 }, cocoaQtyZone, *this);
-
+	drawText(convertToString(content.cocoaQuantity).c_str(), { 255,255,255,255 }, cocoaQtyZone, *this);
+	
 	this->font = TTF_OpenFont("SourceSerifPro-Light.ttf", 25);
 }
