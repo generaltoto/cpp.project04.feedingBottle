@@ -4,8 +4,8 @@
 class StockModel
 {
 protected:
-	float milkQuantity;
-	float cocoaQuantity;
+	int milkQuantity;
+	int cocoaQuantity;
 
 public:
 
@@ -13,18 +13,18 @@ public:
 	StockModel();
 
 	/// Returns the milk stock value
-	float getMilkStock();
+	int getMilkStock();
 
 	/// Returns the cocoa stock value
-	float getCocoaStock();
+	int getCocoaStock();
 
 	/// Adds some quantity to the stock 
 	/// \param milkToAdd : quantity of milk to add to the stock (in mL)
 	/// \param cocoaToAdd : quantity of cocoa to add to the stock (in mg)
-	void addStock(float milkToAdd, float cocoaToAdd);
+	void addStock(int milkToAdd, int cocoaToAdd);
 
 	/// Removes some materials from the stock 
 	/// \param milkToRemove : quantity of milk to remove from the stock (in mL)
 	/// \param cocoaToRemove : quantity of cocoa to remove from the stock (in mg)
-	void emptyStock(float milkToRemove, float cocoaToRemove);
+	void emptyStock(int milkToRemove, int cocoaToRemove);
 };

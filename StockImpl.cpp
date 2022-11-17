@@ -5,16 +5,16 @@ StockModel::StockModel() {
 	cocoaQuantity = 500;
 }
 
-float StockModel::getMilkStock() { return this->milkQuantity; }
+int StockModel::getMilkStock() { return this->milkQuantity; }
 
-float StockModel::getCocoaStock() { return this->cocoaQuantity; }
+int StockModel::getCocoaStock() { return this->cocoaQuantity; }
 
-void StockModel::addStock(float milkToAdd, float cocoaToAdd) {
+void StockModel::addStock(int milkToAdd, int cocoaToAdd) {
 	this->milkQuantity += milkToAdd;
 	this->cocoaQuantity += cocoaToAdd;
 }
 
-void StockModel::emptyStock(float milkToAdd, float cocoaToAdd) {
+void StockModel::emptyStock(int milkToAdd, int cocoaToAdd) {
 	this->milkQuantity -= milkToAdd;
 	this->cocoaQuantity -= cocoaToAdd;
 }

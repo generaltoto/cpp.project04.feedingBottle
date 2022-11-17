@@ -8,14 +8,22 @@ using namespace std;
 
 /// Draws a rectangle
 /// \param - color : rgba color of our rectangle
-/// \param - x : x position of the rectangle
-/// \param - y : y position of the rectangle
-/// \param - width : width of the rectangle
-/// \param - height : height of the rectangle
-void drawRectangle(SDL_Color color, SDL_Rect rect, SDL_Renderer* renderer);
+/// \param - rect : rectangle with : x, y, width, height
+/// \param - renderer : renderer of our app.
+void drawRectangle(
+	SDL_Color color, 
+	SDL_Rect rect, 
+	SDL_Renderer* renderer
+);
 
 /// Draws text on the screen
 /// \param - text : text to draw
 /// \param - textColor : text color
 /// \param - zone : rectangle in which the text is going to be displayed
-void drawText(const char* text, SDL_Color textColor, SDL_Rect zone, SdlWindowModel window);
+/// \param - window : window of our app for context
+void drawText(
+	const char* text, 
+	SDL_Color textColor, 
+	SDL_Rect zone, 
+	SdlWindowModel window
+);

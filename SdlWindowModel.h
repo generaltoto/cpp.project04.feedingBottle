@@ -2,6 +2,9 @@
 
 #include "Shared.h"
 #include "Button.h"
+#include "UtilityFunctions.h"
+#include "BottleModel.h"
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <list>
@@ -50,7 +53,44 @@ public:
 	/// Creates the SDL window and keeps it open until we press the red cross
 	void initSDLWindow(void);
 
-	/// Displays the navbar of the app
-	void drawNavbar(void);
+	/// Draws the navbar.
+	void drawAppbar(
+		DailyButton& daily, 
+		StockButton& stock, 
+		AddBot& add
+		);
+
+	/// Changes the view depending on the given currentView.
+	void switchView(
+		ContentTemplate content, 
+		DisplayView currentView, 
+		DailyButton& daily, 
+		StockButton& stock, 
+		AddBot& add,
+		std::list<BottleModel> bottleList
+	);
+
+	/// Renders the bottles planning with navbar
+	void dispalyDailyView(
+		DailyButton& daily, 
+		StockButton& stock, 
+		AddBot& add, 
+		list<BottleModel> bottleList
+	);
+
+	/// Renders the page to add a new bottle
+	void displayAddBottleView(
+		DailyButton& daily, 
+		StockButton& stock, 
+		AddBot& add
+	);
+
+	/// Renders the stock of ingredients
+	void displayStockView(
+		ContentTemplate content, 
+		DailyButton& daily, 
+		StockButton& stock, 
+		AddBot& add
+	);
 };
 

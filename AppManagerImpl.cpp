@@ -10,13 +10,41 @@ using namespace std;
 const int NUMBER_SECONDS_IN_AN_HOUR = 3600;
 
 AppManager::AppManager() {
-	bottleList = {};
+	/* This is supposed to be empty but fill with meaningless values for graphical demonstration purposes */
+	bottleList = {
+		BottleModel{
+			330,
+			14424,
+			ContentTemplate{
+				150,
+				150
+			}
+		},
+		BottleModel{
+			330,
+			165156161,
+			ContentTemplate{
+				150,
+				150
+			}
+		},
+		BottleModel{
+			330,
+			785087227,
+			ContentTemplate{
+				150,
+				150
+			}
+		}
+	};
+	currentView = DAILY;
 	isAutomaticCommand = false;
 }
 
 AppManager::~AppManager() {}
 
 bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity) {
+	/* Checking if we have enough stock for the bottle then creating it */
 	if (stock.getMilkStock() >= command.content.milkQuantity) stock.emptyStock(command.content.milkQuantity, 0);
 	else {
 		cout << "\nPlus assez de lait !" << endl;
@@ -33,7 +61,7 @@ bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity) {
 
 void AppManager::setTimer(BottleModel bottle) {
 	using namespace chrono;
-	
+
 	long long timerTime = bottle.takenDate - duration_since_midnight(system_clock::now());
 	if (timerTime <= 0) cout << "\tL'heure que vous avez séléctionné est déjà passée." << endl;
 	else {
@@ -83,35 +111,32 @@ void checkCinFloatError(float& variable)  {
 	}
 }
 
-void AppManager::runInputs() {
+void AppManager::run() {
 	//Creation of the window
 	SdlWindowModel window;
-	initWindow(window);
-	window.drawNavbar();
 
 	//Creation of the firsts buttons then display them.
 	DailyButton daily = {
-	{0, 50, SCREEN_WIDTH / 3, 40},
-	{255, 150, 150, 255},
-	{255, 255, 255, 255},
-	"Daily"
+		{0, 50, SCREEN_WIDTH / 3, 40},
+		{100, 100, 100, 255},
+		{20, 20, 20, 255},
+		"Daily"
 	};
 	StockButton stockView = {
-		{(SCREEN_WIDTH / 3)*2, 50, SCREEN_WIDTH / 3, 40},
-		{150, 255, 150, 255},
-		{255, 255, 255, 255},
+		{(SCREEN_WIDTH / 3) * 2, 50, SCREEN_WIDTH / 3, 40},
+		{200, 200, 200, 255},
+		{20, 20, 20, 255},
 		"Stock"
 	};
 	AddBot add = {
 		{(SCREEN_WIDTH / 3), 50, SCREEN_WIDTH / 3, 40},
-		{150, 150, 255, 255},
-		{255, 255, 255, 255},
+		{150, 150, 150, 255},
+		{20, 20, 20, 255},
 		"Add bottle"
 	};
-	daily.displayButton(window.getRenderer(), window);
-	stockView.displayButton(window.getRenderer(), window);
-	add.displayButton(window.getRenderer(), window);
-	SDL_RenderPresent(window.getRenderer());
+
+	initWindow(window);
+	window.switchView({ this->stock.getMilkStock() , this->stock.getCocoaStock() }, this->currentView, daily, stockView, add, this->bottleList);
 
 	//Start of the run loop
 	SDL_Event e;
@@ -121,14 +146,18 @@ void AppManager::runInputs() {
 			if (e.type == SDL_QUIT) quit = true;
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
+				ContentTemplate currentStock = { this->stock.getMilkStock() , this->stock.getCocoaStock()};
 				if (daily.clickOnRect(e.motion.x, e.motion.y)) {
-					daily.onClick();
+					daily.onClick(this->currentView);
+					window.switchView(currentStock, this->currentView, daily, stockView, add, this->bottleList);
 				}
 				if (stockView.clickOnRect(e.motion.x, e.motion.y)) {
-					stockView.onClick();
+					stockView.onClick(this->currentView);
+					window.switchView(currentStock, this->currentView, daily, stockView, add, this->bottleList);
 				}
 				if (add.clickOnRect(e.motion.x, e.motion.y)) {
-					add.onClick();
+					add.onClick(this->currentView);
+					window.switchView(currentStock, this->currentView, daily, stockView, add, this->bottleList);
 				}
 			}
 		}
@@ -136,8 +165,14 @@ void AppManager::runInputs() {
 
 	return;
 
-	cout << "Stock de lait : " << stock.getMilkStock() << endl;
-	cout << "Stock de cacao : " << stock.getCocoaStock() << "\n\n";
+	/*
+	The following part was all the logical process of the app's run loop.
+	It still works with entries in the terminal.
+	To test it, put in commentaries the first lines of the function, from 116 to 167.
+	*/
+
+	cout << "Stock de lait : " << this->stock.getMilkStock() << endl;
+	cout << "Stock de cacao : " << this->stock.getCocoaStock() << "\n\n";
 
 	bool automatic = true;
 	cout << "Voulez faire une programation automatique (toutes les 3h) ? Repondre 0 (non) / 1 (oui)" << endl;
@@ -149,16 +184,16 @@ void AppManager::runInputs() {
 	cin >> bottleCapacity;
 	checkCinIntError(bottleCapacity);
 
-	BottleContent content;
+	ContentTemplate content;
 	cout << "Quelle quantité de lait vouler vous ajouter ? (en mL)" << endl;
 	cout << "Pour rappel, il vous reste : " << stock.getMilkStock() << endl;
 	cin >> content.milkQuantity;
-	checkCinFloatError(content.milkQuantity);
+	checkCinIntError(content.milkQuantity);
 
 	cout << "Quelle quantité de cacao vouler vous ajouter ? (en mg)" << endl;
 	cout << "Pour rappel, il vous reste : " << stock.getCocoaStock() << endl;
 	cin >> content.cocoaQuantity;
-	checkCinFloatError(content.cocoaQuantity);
+	checkCinIntError(content.cocoaQuantity);
 
 	if (automatic == 1)
 	{
@@ -175,12 +210,12 @@ void AppManager::runInputs() {
 		for (Uint32 i = 0; i < nbBottle; i++) {
 			if (addBottle({ content, convertToSeconds(date) + (i * 3 * NUMBER_SECONDS_IN_AN_HOUR) }, bottleCapacity))
 			{
-				cout << "Programmé la " << i+1 << "e bouteille" << endl;
+				cout << "Programmé la " << i + 1 << "e bouteille" << endl;
 				continue;
 			}
 			else
 			{
-				cout << "Pas assez d'ingrédients" << endl; 
+				cout << "Pas assez d'ingrédients" << endl;
 				break;
 			}
 		}
@@ -209,7 +244,7 @@ void AppManager::runInputs() {
 		{
 			if (addBottle({ content, iterateDatesList(datesList, i) }))
 			{
-				cout << "Programmé la " << i+1 << "e bouteille" << endl;
+				cout << "Programmé la " << i + 1 << "e bouteille" << endl;
 				continue;
 			}
 			else

@@ -1,8 +1,10 @@
 #pragma once
 
-#include <SDL.h>
+#include "Shared.h"
 
+#include <SDL.h>
 #include <iostream>
+
 using namespace std;
 
 class SdlWindowModel;
@@ -42,31 +44,51 @@ public:
 class DailyButton : public Button {
 public:
 
-	DailyButton(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	DailyButton(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
-	void onClick();
+	void onClick(DisplayView& view);
 };
 
 class StockButton : public Button {
 public:
 
-	StockButton(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	StockButton(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
-	void onClick();
+	void onClick(DisplayView& view);
 };
 
 class AddBot : public Button {
 public:
 
-	AddBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	AddBot(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
-	void onClick();
+	void onClick(DisplayView& view);
 };
 
 class AddStock : public Button {
 public:
 
-	AddStock(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	AddStock(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
 	void onClick();
 };
@@ -74,15 +96,25 @@ public:
 class AutoInc : public Button {
 public:
 
-	AutoInc(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	AutoInc(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
-	void onClick(bool* time);
+	void onClick(bool& time);
 };
 
 class Submit : public Button {
 public:
 
-	Submit(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	Submit(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
 	void onClick();
 };
@@ -90,7 +122,12 @@ public:
 class ViewBot : public Button {
 public:
 
-	ViewBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	ViewBot(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+		);
 
 	void onClick();
 };
@@ -98,7 +135,12 @@ public:
 class EditBot : public Button {
 public:
 
-	EditBot(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	EditBot(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
 	void onClick();
 };
@@ -106,7 +148,12 @@ public:
 class TakeState : public Button {
 public:
 
-	TakeState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	TakeState(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
 	void onClick();
 };
@@ -114,7 +161,12 @@ public:
 class SchedState : public Button {
 public:
 
-	SchedState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	SchedState(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor, 
+		const char* text
+	);
 
 	void onClick();
 };
@@ -122,7 +174,12 @@ public:
 class SpitState : public Button {
 public:
 
-	SpitState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text);
+	SpitState(
+		SDL_Rect rect, 
+		SDL_Color color, 
+		SDL_Color textColor,
+		const char* text
+	);
 
 	void onClick();
 };

@@ -159,6 +159,7 @@
     <ClCompile Include="SdlFunction.cpp" />
     <ClCompile Include="SdlWindowModel.cpp" />
     <ClCompile Include="StockImpl.cpp" />
+    <ClCompile Include="UtilityFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

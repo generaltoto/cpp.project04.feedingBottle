@@ -19,6 +19,7 @@ private:
 	std::list<BottleModel> bottleList;
 	StockModel stock;
 	
+	DisplayView currentView;
 	bool isAutomaticCommand;
 
 public:
@@ -38,7 +39,7 @@ public:
 	void launchCommand();
 
 	/// Runs all inputs of the app 
-	void runInputs();
+	void run();
 
 	/// Initiates the SDL window of our application
 	void initWindow(SdlWindowModel& window);
