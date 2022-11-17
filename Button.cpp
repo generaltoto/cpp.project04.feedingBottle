@@ -2,9 +2,9 @@
 #include "SdlFunction.h"
 using namespace std;
 
-Button::Button() { }
+Button::Button() { /* Empty constructor */ }
 
-Button::~Button() { }
+Button::~Button() { /* Empty destructor */ }
 
 void Button::displayButton(SDL_Renderer* renderer, SdlWindowModel& window) {
 	drawRectangle(this->color, this->rect, renderer);
@@ -13,6 +13,7 @@ void Button::displayButton(SDL_Renderer* renderer, SdlWindowModel& window) {
 }
 
 bool Button::clickOnRect(int x, int y) {
+	//Checks if the tested coordonates are in the button's rect
 	if (x >= this->rect.x && x <= (this->rect.x + this->rect.w) 
 		&& y >= this->rect.y && y <= (this->rect.y + this->rect.h)) {
 		return true;
@@ -128,14 +129,14 @@ void EditBot::onClick() {
 
 
 
-TakenState::TakenState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
+TakeState::TakeState(SDL_Rect rect, SDL_Color color, SDL_Color textColor, const char* text) {
 	this->rect = rect;
 	this->color = color;
 	this->textColor = textColor;
 	this->text = text;
 }
 
-void TakenState::onClick() {
+void TakeState::onClick() {
 	cout << "Clic taken" << endl;;
 }
 

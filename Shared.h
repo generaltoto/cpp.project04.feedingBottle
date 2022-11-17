@@ -4,21 +4,22 @@
 #ifndef SHARED_H
 #define SHARED_H
 
-/// Fedding Bottle State 
+/// Fedding Bottle States.
 enum TakenState { TAKEN, SCHEDULED, SPITED };
 
-enum View { DAILYVIEW, STOCKVIEW };
+/// Menu statement views.
+enum View { DAILYVIEW, STOCKVIEW, ADDVIEW };
 
 const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 650;
 
-/// Basic date format for dispaly
+/// Basic date format for dispaly.
 struct BasicDate { long long hours, minutes, seconds; };
 
-/// All ingredients contained in the bottle
+/// All ingredients contained in the bottle.
 struct BottleContent { float milkQuantity, cocoaQuantity; };
 
-/// Template for bottle command. All quantities are in mg
+/// Template for bottle command. All quantities are in mg.
 struct BottleCommandTemplate
 {
 	BottleContent content;

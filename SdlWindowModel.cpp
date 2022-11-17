@@ -1,8 +1,7 @@
 #include "SdlWindowModel.h"
 #include "SdlFunction.h"
 
-SdlWindowModel::SdlWindowModel()
-{
+SdlWindowModel::SdlWindowModel() {
 	this->window = NULL;
 	this->renderer = NULL;
 	this->surface = NULL;
@@ -10,7 +9,7 @@ SdlWindowModel::SdlWindowModel()
 	this->font = NULL;
 }
 
-SdlWindowModel::~SdlWindowModel() {}
+SdlWindowModel::~SdlWindowModel() { }
 
 SDL_Window* SdlWindowModel::getWindow(void) { return this->window; }
 SDL_Renderer* SdlWindowModel::getRenderer(void) { return this->renderer; }
@@ -22,8 +21,7 @@ void SdlWindowModel::setSurface(SDL_Surface* surface) { this->surface = surface;
 void SdlWindowModel::setTexture(SDL_Texture* texture) { this->texture = texture; }
 void SdlWindowModel::setFont(TTF_Font* font) { this->font = font; }
 
-void SdlWindowModel::initSDLWindow(void)
-{
+void SdlWindowModel::initSDLWindow(void) {
 	if (SDL_Init(SDL_INIT_TIMER) < 0) std::cout << "Error initializing SDL : %s\n" << SDL_GetError() << std::endl;
 	if (TTF_Init() < 0) std::cout << "Error initializing TTF : %s\n" << TTF_GetError() << std::endl;
 	else
@@ -38,8 +36,7 @@ void SdlWindowModel::initSDLWindow(void)
 	SDL_RenderPresent(this->renderer);
 }
 
-void SdlWindowModel::drawNavbar(void)
-{
+void SdlWindowModel::drawNavbar(void) {
 	drawRectangle({ 100,100,100,255 }, { 0, 0, SCREEN_WIDTH, 50 }, this->renderer);
 	drawText("Baby Feeder", { 255,255,255,255 }, { SCREEN_WIDTH / 3, 0, 50, 25 },*this);
 	SDL_RenderPresent(this->renderer);

@@ -23,7 +23,9 @@ private:
 
 public:
 
+	/// Contructor.
 	AppManager();
+	/// Destructor.
 	~AppManager();
 
 	/// Adds a bottle to the [bottleList]

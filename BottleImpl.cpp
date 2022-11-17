@@ -6,7 +6,10 @@ BottleModel::BottleModel(int maxCapacity, time_t date, BottleContent ingredients
 	this->maxCapacity = maxCapacity;
 	this->quantityInBottle = ingredients;
 	this->takenDate = date;
+	this->taken = SCHEDULED;
 }
+
+BottleModel::~BottleModel() { }
 
 void BottleModel::updateTaken(TakenState state) { this->taken = state; }
 

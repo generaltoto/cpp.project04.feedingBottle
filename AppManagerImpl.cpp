@@ -16,57 +16,43 @@ AppManager::AppManager() {
 
 AppManager::~AppManager() {}
 
-bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity)
-{
+bool AppManager::addBottle(BottleCommandTemplate command, int bottleCapacity) {
 	if (stock.getMilkStock() >= command.content.milkQuantity) stock.emptyStock(command.content.milkQuantity, 0);
-	else
-	{
+	else {
 		cout << "\nPlus assez de lait !" << endl;
 		return false;
 	}
-
 	if (stock.getCocoaStock() >= command.content.cocoaQuantity) stock.emptyStock(0, command.content.cocoaQuantity);
-	else
-	{
+	else {
 		cout << "\nPlus assez de cacao !" << endl; 
 		return false;
 	}
-
 	this->bottleList.push_back(BottleModel(bottleCapacity, command.deliveryDate, command.content));
 	return true;
 }
 
-
-
-void AppManager::setTimer(BottleModel bottle)
-{
+void AppManager::setTimer(BottleModel bottle) {
 	using namespace chrono;
 	
 	long long timerTime = bottle.takenDate - duration_since_midnight(system_clock::now());
 	if (timerTime <= 0) cout << "\tL'heure que vous avez séléctionné est déjà passée." << endl;
-	else
-	{
+	else {
 		cout << "\tStarted timer with " << timerTime << " seconds" << endl;
 		SDL_Delay(timerTime * 1000);
 		cout << "\t\tEnd of " << timerTime << " seconds timer" << endl;
 	}
 }
 
-void AppManager::launchCommand()
-{
-	for (int i = 0; i < this->bottleList.size(); i++)
-	{
+void AppManager::launchCommand() {
+	for (int i = 0; i < this->bottleList.size(); i++) {
 		setTimer(iterateBottlesList(this->bottleList, i));
 	}
 	this->bottleList = {};
 }
 
-void checkCinBoolError(bool& variable)
-{
-	while (true)
-	{
-		if (cin.fail())
-		{
+void checkCinBoolError(bool& variable) {
+	while (true) {
+		if (cin.fail()) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cin >> variable;
@@ -75,12 +61,9 @@ void checkCinBoolError(bool& variable)
 	}
 }
 
-void checkCinIntError(int& variable)
-{
-	while (true)
-	{
-		if (cin.fail())
-		{
+void checkCinIntError(int& variable) {
+	while (true) {
+		if (cin.fail()) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cin >> variable;
@@ -89,12 +72,9 @@ void checkCinIntError(int& variable)
 	}
 }
 
-void checkCinFloatError(float& variable) 
-{
-	while (true)
-	{
-		if (cin.fail())
-		{
+void checkCinFloatError(float& variable)  {
+	while (true) {
+		if (cin.fail()) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cin >> variable;
@@ -103,12 +83,13 @@ void checkCinFloatError(float& variable)
 	}
 }
 
-void AppManager::runInputs()
-{
+void AppManager::runInputs() {
+	//Creation of the window
 	SdlWindowModel window;
 	initWindow(window);
 	window.drawNavbar();
 
+	//Creation of the firsts buttons then display them.
 	DailyButton daily = {
 	{0, 50, SCREEN_WIDTH / 3, 40},
 	{255, 150, 150, 255},
@@ -132,6 +113,7 @@ void AppManager::runInputs()
 	add.displayButton(window.getRenderer(), window);
 	SDL_RenderPresent(window.getRenderer());
 
+	//Start of the run loop
 	SDL_Event e;
 	bool quit = false;
 	while (quit == false) {
@@ -245,8 +227,7 @@ void AppManager::runInputs()
 
 void AppManager::initWindow(SdlWindowModel& window) { window.initSDLWindow(); }
 
-void AppManager::destroyWindow(SdlWindowModel& window)
-{
+void AppManager::destroyWindow(SdlWindowModel& window) {
 	SDL_DestroyWindow(window.getWindow());
 	SDL_FreeSurface(window.getSurface());
 	SDL_DestroyTexture(window.getTexture());

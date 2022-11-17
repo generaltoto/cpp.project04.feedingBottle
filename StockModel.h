@@ -1,5 +1,6 @@
 #pragma once
 
+/// Manages the stock of the products in a feeding bottle.
 class StockModel
 {
 protected:
@@ -8,6 +9,7 @@ protected:
 
 public:
 
+	/// Constructor.
 	StockModel();
 
 	/// Returns the milk stock value
